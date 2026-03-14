@@ -51,7 +51,7 @@ const EditSubject = () => {
 
     try {
       await API.put(`/subjects/${subjectId}`, formData);
-      alert('Subject updated successfully!');
+      alert('Subject updated! Please regenerate the schedule from the dashboard.');
       navigate('/teacher/dashboard');
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong');
