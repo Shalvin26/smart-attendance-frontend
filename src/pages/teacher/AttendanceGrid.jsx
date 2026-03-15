@@ -18,22 +18,24 @@ const AttendanceGrid = () => {
   }, []);
 
   const fetchData = async () => {
-    try {
-      const scheduleRes = await API.get(`/schedule/${subjectId}`);
-      const upcomingSchedules = scheduleRes.data.schedules.filter(
-        s => s.status === 'upcoming'
-      );
-      setSchedules(upcomingSchedules);
+  try {
+    const scheduleRes = await API.get(`/schedule/${subjectId}`);
+    
+    // Include both upcoming AND rescheduled lectures
+    const availableSchedules = scheduleRes.data.schedules.filter(
+      s => s.status === 'upcoming' || s.status === 'rescheduled'
+    );
+    setSchedules(availableSchedules);
 
-      const subjectRes = await API.get(`/subjects/${subjectId}`);
-      setStudents(subjectRes.data.subject.students);
+    const subjectRes = await API.get(`/subjects/${subjectId}`);
+    setStudents(subjectRes.data.subject.students);
 
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleTap = (studentId) => {
     setAttendance(prev => {
