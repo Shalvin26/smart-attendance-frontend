@@ -2,7 +2,14 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import API from '../api/axios';
 
-const BRANCHES = ['CSE', 'ECE', 'ME', 'CE', 'EE', 'IT', 'CHE'];
+const BRANCHES = [ 
+  'Mechanical',
+  'CSE',
+  'EE',
+  'EC',
+  'Material Science',
+  'Chemical',
+  'Civil'];
 
 const Register = () => {
   const [formData, setFormData] = useState({
